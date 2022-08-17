@@ -1,0 +1,413 @@
+
+!#/bin/bash
+ls -al | more
+
+2.
+#!/bin/bash
+number=1
+rows=5
+for((i=1; i<=rows; i++))
+do
+  for((j=1; j<=i; j++))
+  do
+    echo -n "$number"
+    number=$((number + 1))
+  done
+  number=1
+  echo
+done
+
+exit 0
+
+3.
+!#/bin/bash
+number=1
+rows=4
+for((i=1; i<=rows; i++))
+do
+  for((j=1; j<=i; j++))
+  do
+    echo -n "$number "
+    number=$((number + 1))
+  done
+  echo
+done
+
+4.
+!#/bin/bash
+copy and ssh
+
+
+5.
+!#/bin/bash
+echo "Give me two numbers"
+read a b
+echo $a + $b | bc
+echo $a - $b | bc
+echo $a \* $b | bc
+echo $a / $b | bc
+
+
+6.
+!#/bin/bash
+echo "give me two numbers and operators"
+read a b c
+echo $a $c $b | bc
+
+
+8.
+!#/bin/bash
+for f in `find`; do mv -v "$f" "`echo $f | tr '[A-Z]' '[a-z]'`"; done
+~
+
+9.
+#! bin/bash
+echo "Enter the number"
+read n
+sd=0
+rev=0
+while [ $n -gt 0 ]
+do
+    sd=$(( $n % 10 ))
+    rev=$(( $rev * 10 + $sd ))
+    n=$(( $n / 10 ))
+done
+echo "Reverse number of entered digit is $rev"
+
+
+10.
+#!/bin/bash
+echo "give me the file name and extension"
+read $a
+sed '/^$/d' sample.sh
+
+
+11.
+#!/bin/bash
+echo "give me a number or string"
+read a
+i=$((${#a}-1))
+echo ${a:$i:1}
+
+
+
+12.
+#! bin/bash
+echo "Enter the Fibonacci series number"
+read N a b
+for (( i=0; i<N; i++ ))
+do
+    echo -n "$a "
+    fn=$((a + b))
+    a=$b
+    b=$fn
+done
+
+
+13.
+
+#!/bin/bash
+echo " give me a number or string"
+read a b c d e
+n=${#a}
+echo "string length is " $n
+m=${#b}
+echo "string length is " $m
+o=${#c}
+echo "string length is " $o
+p=${#d}
+echo "string length is " $p
+q=${#e}
+echo "string length is " $q
+~
+
+
+14.
+
+#!/bin/bash
+echo "Chess Board"
+
+for (( i=1; i<=8; i++))
+do
+        for (( j=1; j<=8; j++))
+        do
+                total=$(($i+$j))
+                temp=$(($total%2))
+                # for alternative blocks
+                if [ $temp -eq 0 ]
+                then
+                        echo -e -n "\033[47m" " "  #white
+                else
+                        echo -e -n "\033[40m" " " #black
+                fi
+        done
+        echo -e -n "\033[0m" " "
+        echo ' '
+done
+
+15.
+#!/bin/bash
+echo "give 5 number and orderd or underderd array"
+read a b c d e f g
+
+arr=($a $b $c $d $e)
+
+echo "Array in original order"
+echo ${arr[*]}
+
+for ((i = 0; i<5; i++))
+do
+
+    for((j = 0; j<5-i-1; j++))
+    do
+
+        if [ ${arr[j]} -gt ${arr[$((j+1))]} ]
+        then
+            # swap
+            temp=${arr[j]}
+            arr[$j]=${arr[$((j+1))]}
+            arr[$((j+1))]=$temp
+        fi
+    done
+done
+
+echo "Array in sorted order :"
+echo ${arr[*]}
+
+echo "Array in sorted order :"
+echo ${arr[*]} | rev
+
+16.
+#!/bin/bash
+nouser=`who | wc -l`
+echo -e "User name: $USER (Login name: $LOGNAME)" >> /tmp/info.tmp.01.$$$
+echo -e "Current Shell: $SHELL"  >> /tmp/info.tmp.01.$$$
+echo -e "Home Directory: $HOME" >> /tmp/info.tmp.01.$$$
+echo -e "Your O/s Type: $OSTYPE" >> /tmp/info.tmp.01.$$$
+echo -e "PATH: $PATH" >> /tmp/info.tmp.01.$$$
+echo -e "Current directory: `pwd`" >> /tmp/info.tmp.01.$$$
+echo -e "Currently Logged: $nouser user(s)" >> /tmp/info.tmp.01.$$$
+if [ -f /etc/redhat-release ]
+then
+    echo -e "OS: `cat /etc/redhat-release`" >> /tmp/info.tmp.01.$$$
+fi
+
+if [ -f /etc/shells ]
+then
+    echo -e "Available Shells: " >> /tmp/info.tmp.01.$$$
+    echo -e "`cat /etc/shells`"  >> /tmp/info.tmp.01.$$$
+fi
+
+echo -e "--------------------------------------------------------------------" >> /tmp/info.tmp.01.$$$
+echo -e "Computer CPU Information:" >> /tmp/info.tmp.01.$$$
+echo -e "--------------------------------------------------------------------" >> /tmp/info.tmp.01.$$$
+cat /proc/cpuinfo >> /tmp/info.tmp.01.$$$
+
+if [ -f /etc/sysconfig/mouse ]
+then
+    echo -e "--------------------------------------------------------------------" >> /tmp/info.tmp.01.$$$
+    echo -e "Computer Mouse Information: " >> /tmp/info.tmp.01.$$$
+
+echo -e "--------------------------------------------------------------------" >> /tmp/info.tmp.01.$$$
+echo -e "File System (Mount):" >> /tmp/info.tmp.01.$$$
+echo -e "--------------------------------------------------------------------" >> /tmp/info.tmp.01.$$$
+cat /proc/mounts >> /tmp/info.tmp.01.$$$
+
+if which dialog > /dev/null
+then
+    dialog  --backtitle "Linux Software Diagnostics (LSD) Shell Script Ver.1.0" --title "Press Up/Down Keys to move" --textbox  /tmp/info.tmp.01.$$$ 21 70
+else
+    cat /tmp/info.tmp.01.$$$ |more
+fi
+fi
+fi
+
+
+17.
+#! bin/bash
+echo "The Fibonacci series is : "
+read N a b
+for (( i=0; i<N; i++ ))
+do
+    echo -n "$a "
+    fn=$((a + b))
+    a=$b
+    b=$fn
+done
+exit 0
+
+22.
+#!/bin/bash
+
+hour=`date +%c | tr -s " " | cut -d " " -f4 | cut -d ":" -f1`
+day=`date +%A`
+mon=`date +%B`
+dte=`date +%d`
+year=`date +%Y`
+tf=`date +%r`
+if [ $hour -ge 5 -a $hour -lt 12 ]
+then
+        echo -e "Good morning `whoami`, Have nice day!\nThis is $day $dte in $mon of $year ($tf)"
+elif [ $hour -ge 12 -a $hour -le 13 ]
+then
+        echo -e "Good noon `whoami`, Have nice day!\nThis is $day $dte in $mon of $year ($tf)"
+elif [ $hour -ge 14 -a $hour -lt 17 ]
+then
+        echo -e "Good afternoon `whoami`, Have nice day!\nThis is $day $dte in $mon of $year ($tf)"
+elif [ $hour -ge 17 -a $hour -lt 21 ]
+then
+        echo -e "Good evening `whoami`, Have nice day!\nThis is $day $dte in $mon of $year ($tf)"
+elif [ $hour -ge 21 -o $hour -lt 5 ]
+then
+        echo -e "Good night `whoami`, Have nice day!\nThis is $day $dte in $mon of $year ($tf)"
+fi
+
+
+23.
+#!/bin/sh
+# shebang to specify that this is an shell script
+
+# Function to get File
+getFile(){
+    # Reading txtFileName to convert it's content
+    echo -n "Enter File Name:"
+    read txtFileName
+    # Checking if file exist
+    if [ ! -f $txtFileName ]; then
+        echo "File Name $txtFileName does not exists."
+        exit 1
+    fi
+}
+
+clear
+  echo "1. Uppercase to Lowercase "
+  echo "2. Lowercase to Uppercase"
+  echo "3. Exit"
+  echo -n "Enter your Choice(1-3):"
+  read Ch
+
+  case "$Ch" in
+    1)
+      # Function Call to get File
+      getFile
+      # Converting to lower case if user chose 1
+      echo "Converting Upper-case to Lower-Case "
+      tr '[A-Z]' '[a-z]' <$txtFileName
+    ;;
+
+    2)
+      # Function Call to get File
+      getFile
+      # Converting to upper case if user chose 2
+      echo "Converting Lower-Case to Upper-Case "
+      tr '[a-z]' '[A-Z]' <$txtFileName
+    ;;
+
+
+    *) # exiting for all other cases
+        echo "Exiting..."
+        exit
+ ;;
+  esac
+  
+  25.
+  if [ $# -eq 1 ]
+then
+        if [ -d $1 ]
+        then
+                swps=(`find $1 -name "*.swp" -type f`)
+                if [ ${#swps[@]} -ne 0 ]
+                then
+                        find $1 -name "*.swp" -type f -delete
+                else
+                        echo "No swp files found in test_swp."
+                fi
+        else
+                echo "Error : '$1' no such a file or directory"
+        fi
+else
+        swps=(`find ~ -name "*.swp" -type f`)
+        if [ ${#swps[@]} -ne 0 ]
+        then
+                echo "swap file found :"
+                find ~ -name "*.swp" -type f
+        fi
+fi
+
+
+31.
+#!/bin/bash
+
+filesys=(`df | tr -s " " | cut -d " " -f1`)
+for j in ${filesys[@]}
+do
+        echo "$j"
+done
+useper=(`df | tr -s " " | cut -d " " -f5 | cut -d "%" -f1`)
+for i in `seq $((${#useper[@]}-1))`
+do
+        if [ ${useper[i]} -ge 90 ]
+        then
+echo "Filesystem ${filesys[i]} have less than 10% free space"
+fi
+done
+
+32.
+#!/bin/bash
+usrid=(`cut -d ":" -f3 /etc/passwd`)
+if [ $# -gt 0 ]
+then
+if [ $# -eq 1 ]
+then
+echo "Error : Please pass 2 arguments through CL.
+Usage : ./30_user_ids.sh 100 200"
+elif [ $1 -gt $2 ]
+then
+echo "Error : Invalid range. Please enter the valid range through CL."
+else
+count=0
+for i in ${usrid[@]}
+        do
+if [ $i -ge $1 -a $i -le $2 ]
+        then
+  let count=$count+1
+        fi
+        done
+        echo "Total count of user ID between $1 to $2 is : $count"
+        fi
+     else
+   count=0
+  for i in ${usrid[@]}
+        do
+if [ $i -ge 500 -a $i -le 10000 ]
+        then
+        let count=$count+1
+        fi
+        done
+        echo "Total count of user ID between 500 to 10000 is: $count"
+         fi
+
+
+
+33.
+#!/bin/bash
+
+arr=(`printenv PATH | tr ":" " "`)
+total=0
+for i in ${arr[@]}
+do
+        if [ -d $i ]
+        then
+                cd $i
+                count=0
+                for j in `ls`
+                do
+                        if [ -f $j -a -x $j ]  #
+                        then
+                                let count=$count+1
+                        fi
+                done
+                echo -e "Current dir: $i\nCurrent count: $count"
+                let total=$total+$count
+        fi
+done
